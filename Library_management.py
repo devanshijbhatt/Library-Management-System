@@ -63,6 +63,7 @@ class Library_Management:
             # Use ISBN to find the book index
             book_index = self.books_df[self.books_df['ISBN'] == isbn].index[0]
             # Check if the book is borrowed
+            '''Check if isbn code which is given as input has same title as input in the dataframe'''
             if self.books_df.at[book_index, 'Is Borrowed']:
                 self.books_df.at[book_index, 'Is Borrowed'] = False
                 print("Book has been returned")
@@ -71,3 +72,6 @@ class Library_Management:
                 print("Book is already there. Check the ISBN code again.")
         else:
             print("The book which you want to return is not registered in the system.")
+            
+    def view_available_books(self):
+        '''Test attempts to view all the books available in the library'''
