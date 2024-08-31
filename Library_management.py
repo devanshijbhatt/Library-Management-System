@@ -41,11 +41,11 @@ class Library_Management:
         print(f"Book '{book.title}' added to the library with ISBN '{book.isbn}'.")
         # print(self.books_df)
     
-    def borrow_book(self, book_title):
+    def borrow_book(self, book_title, isbn):
         # Check if the book is available for borrowing
-        if book_title in self.books_df['Title'].values:
+        if isbn in self.books_df['ISBN'].values:
             # Find the index of the book in the DataFrame
-            book_index = self.books_df[self.books_df['Title'] == book_title].index[0]
+            book_index = self.books_df[self.books_df['ISBN'] == isbn].index[0]
             
             # Check if the book is borrowed or not
             if not self.books_df.at[book_index, 'Is Borrowed']:
