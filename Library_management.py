@@ -1,6 +1,8 @@
 import pandas as pd
 
-# Library_management.py
+class BookNotAvailableError(Exception):
+    pass
+
 class Book:
     def __init__(self, isbn, title, author, publication_year):
         self.isbn = isbn
@@ -35,7 +37,23 @@ class Library_Management:
             "Publication Year": book.publication_year,
             "Is Borrowed": False
         }])
-
         self.books_df = pd.concat([self.books_df, new_book_df], ignore_index=True)
         print(f"Book '{book.title}' added to the library with ISBN '{book.isbn}'.")
-        print(self.books_df)
+        # print(self.books_df)
+    
+    def borrow_book(self, book_title):
+        # Check if the book is available for borrowing
+        if book_title in self.books_df['Title'].values:
+            # Find the index of the book in the DataFrame
+            book_index = self.books_df[self.books_df['Title'] == book_title].index[0]
+            
+            # Check if the book is borrowed or not
+            if not self.books_df.at[book_index, 'Is Borrowed']:
+                # Mark the book as borrowed
+                self.books_df.at[book_index, 'Is Borrowed'] = True
+                print("Book has been borrowed")
+                print(self.books_df)
+            else:
+                print("Book is not available to borrow")
+        else:
+            print("Book not present")
