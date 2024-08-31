@@ -57,3 +57,17 @@ class Library_Management:
                 print("Book is not available to borrow")
         else:
             print("Book not present")
+    
+    def return_book(self, book_title, isbn):
+        if isbn in self.books_df['ISBN'].values:
+            # Use ISBN to find the book index
+            book_index = self.books_df[self.books_df['ISBN'] == isbn].index[0]
+            # Check if the book is borrowed
+            if self.books_df.at[book_index, 'Is Borrowed']:
+                self.books_df.at[book_index, 'Is Borrowed'] = False
+                print("Book has been returned")
+                print(self.books_df)
+            else: 
+                print("Book is already there. Check the ISBN code again.")
+        else:
+            print("The book which you want to return is not registered in the system.")
