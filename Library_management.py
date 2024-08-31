@@ -74,4 +74,11 @@ class Library_Management:
             print("The book which you want to return is not registered in the system.")
             
     def view_available_books(self):
-        '''Test attempts to view all the books available in the library'''
+        # Filter the DataFrame to show only books that are not borrowed
+        available_books = self.books_df[self.books_df['Is Borrowed'] == False]
+        if available_books.empty:
+            print("No books are currently available.")
+        else:
+            print("Available books:")
+            print(available_books)
+

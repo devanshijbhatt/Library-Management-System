@@ -79,9 +79,18 @@ class TestLibrary(unittest.TestCase):
         library.add_book("The Twilight Saga", "Stephenie Meyer", 2005)
         library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
         library.return_book("New Moon", 4)
-        
     
+    def test_view_available_books(self):
+        '''Test attempts to return all the books which are available in the library'''
+        library = Library_Management()
+        library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
+        library.add_book("The Twilight Saga", "Stephenie Meyer", 2005)
+        library.add_book("To Kill a Mockingbird", "Harper Lee", 1960)
+        library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
+        library.borrow_book("The Great Gatsby",4)
+        library.borrow_book("The Twilight Saga",2)
+        library.return_book("The Great Gatsby",4)
+        library.view_available_books()
     
-        
 if __name__ == '__main__':
     unittest.main()
