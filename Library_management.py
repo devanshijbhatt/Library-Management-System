@@ -1,5 +1,8 @@
 import pandas as pd
-import datetime
+
+class BookNotAvailableError(Exception):
+    pass
+
 class Book:
     def __init__(self, isbn, title, author, publication_year):
         self.isbn = isbn
@@ -19,14 +22,14 @@ class Library_Management:
         self.books_df = pd.DataFrame(columns=["ISBN", "Title", "Author", "Publication Year", "Is Borrowed"])
 
     def add_book(self, title, author, publication_year):
-        current_year = datetime.datetime.now().year
-        if publication_year > current_year:
-            raise ValueError("The publication year cannot be in the future.")
-        
+        # Increment the ISBN counter by 1 for each new book
         Library_Management.isbn_counter += 1
         isbn = Library_Management.isbn_counter
+        
+        # Create a new Book object
         book = Book(isbn, title, author, publication_year)
 
+        # Add the book details to the DataFrame using concat
         new_book_df = pd.DataFrame([{
             "ISBN": book.isbn,
             "Title": book.title,
@@ -35,6 +38,8 @@ class Library_Management:
             "Is Borrowed": False
         }])
         self.books_df = pd.concat([self.books_df, new_book_df], ignore_index=True)
+        print(f"Book '{book.title}' added to the library with ISBN '{book.isbn}'.")
+        # print(self.books_df)
     
     def borrow_book(self, book_title, isbn):
         # Check if the book is available for borrowing

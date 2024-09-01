@@ -10,18 +10,19 @@ class TestLibrary(unittest.TestCase):
 
         # Add a book to the library
         library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
-        
-        with self.assertRaises(ValueError) as context:
-            library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 2225)
-        
-        # Verify that the correct error message is raised
-        self.assertEqual(str(context.exception), "The publication year cannot be in the future.")
+
         # Check if the book was added successfully
         # added_book = library.books_df.iloc[0]
         # self.assertEqual(added_book["Title"], "The Great Gatsby")
         # self.assertEqual(added_book["Author"], "F. Scott Fitzgerald")
         # self.assertEqual(added_book["Publication Year"], 1925)
-    
+        
+        # library.add_book("To Kill a Mockingbird", "Harper Lee", 1960)
+        # added_book = library.books_df.iloc[1]
+        # self.assertEqual(added_book["Title"], "To Kill a Mockingbird")
+        # self.assertEqual(added_book["Author"], "Harper Lee")
+        # self.assertEqual(added_book["Publication Year"], 1960)
+        
     def test_borrow_book(self):
         """
         Test that it can borrow a book from the library if it's available
@@ -90,7 +91,6 @@ class TestLibrary(unittest.TestCase):
         library.borrow_book("The Twilight Saga",2)
         library.return_book("The Great Gatsby",4)
         library.view_available_books()
-        
     
 if __name__ == '__main__':
     unittest.main()
